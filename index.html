@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloud RP</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(130deg, #0e0e0e, #000000);
+        color: white;
+        overflow-x: hidden;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 60px;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(8px);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        border-bottom: 1px solid rgba(100, 98, 98, 0.769);
+    }
+
+    nav .logo img {
+        height: 50px;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        padding: 0;
+        margin: 0;
+    }
+
+    nav ul li a {
+        color: #fff;              
+        text-decoration: none;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    nav ul li a:hover {
+        color: #11dff1;           
+    }
+
+    .hero {
+        text-align: center;
+        padding: 130px 20px 80px;
+        position: relative;
+    }
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(40,203,203,0.25), transparent 70%);
+        transform: translate(-50%, -50%);
+        filter: blur(40px);
+        z-index: -1;
+        animation: pulse 6s infinite alternate;
+    }
+
+    @keyframes pulse {
+        0% { opacity: 0.4; }
+        100% { opacity: 0.7; }
+    }
+
+    .hero img {
+        width: 240px;
+        animation: fadeDown 1.5s ease;
+    }
+
+    @keyframes fadeDown {
+        0% { opacity: 0; transform: translateY(-20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-size: 38px;
+        font-weight: 700;
+        color: #d8d8d8;
+        letter-spacing: 0.5px;
+    }
+
+    .info-bar {
+        margin: 40px auto;
+        width: 80%;
+        max-width: 700px;
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255,255,255,0.05);
+        border-radius: 14px;
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+    }
+
+    .info-bar div {
+        font-size: 16px;
+        opacity: 0.9;
+    }
+
+    .dot-online {
+        color: #00ff6a;
+        font-size: 22px;
+        position: relative;
+        top: 3px;
+    }
+
+    .players-list {
+        margin: 20px auto;
+        width: 350px;
+        background: rgba(0,0,0,0.35);
+        border: 1px solid rgba(0, 242, 255, 0.3);
+        border-radius: 14px;
+        padding: 20px;
+        text-align: left;
+        backdrop-filter: blur(6px);
+    }
+
+    .players-list h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #28cbcb;
+        font-size: 22px;
+    }
+
+    .players-list ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .players-list li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(20, 144, 148, 0.9);
+        font-size: 16px;
+    }
+
+    .players-list li:last-child {
+        border-bottom: none;
+    }
+
+    .player-dot {
+        color: #00e600;
+        margin-right: 8px;
+    }
+
+    .more-players {
+        background: #056464;
+        border-radius: 20px;
+        text-align: center;
+        padding: 10px;
+        margin-top: 15px;
+        font-size: 15px;
+        display: none;
+    }
+
+    .update-time {
+        margin-top: 15px;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 14px;
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 40px;
+        text-align: center;
+        padding-top: 15px;
+        position: relative; 
+        height: 30px;
+    }
+
+    .footer-bottom p {
+        font-size: 0.85rem;
+        color: #777;
+        margin: 0;
+    }
+
+    .footer-bottom .footer-right {
+        position: absolute;
+        right: 20px; 
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #server-off-message {
+        display: none;             
+        position: fixed;           
+        top: 0; 
+        left: 0;
+        width: 100%; 
+        height: 100%;
+        background-color: #111;    
+        color: white;             
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        text-align: center;
+        font-size: 28px;
+        padding: 20px;
+        z-index: 99999;           
+    }
+
+</style>
+</head>
+
+<body>
+<div id="page-content">
+<nav>
+    <div class="logo">
+        <img src="/assets/CRP.png" alt="CRP Logo">
+    </div>
+
+    <ul>
+        <li><a href='/index.html'>Home</a></li>
+        <li><a href='/Regels.html'>Regels</a></li>
+        <li><a href="/dono.html">Doneren</a></li>
+        <li><a href="https://discord.gg/cloudroleplay" target="_blank">Discord</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <img src="/assets/CRP.png" alt="CRP Logo Groot">
+
+    <h1>Cloud RP wacht op jouw aanwezigheid</h1>
+
+    <div class="info-bar">
+        <div>
+            <span class="dot-online">•</span>
+            <span id="onlinePlayers">Laden...</span> spelers online
+        </div>
+        <div>NL FiveM Roleplay</div>
+        <div>Sinds 2025</div>
+    </div>
+
+    <div class="players-list">
+        <h3>Online Spelers</h3>
+        <ul id="playerContainer">
+            <li>Spelers laden...</li>
+        </ul>
+
+        <div id="morePlayers" class="more-players">
+            + <span id="extraCount"></span> andere spelers online
+        </div>
+
+        <p class="update-time">Laatste update: <span id="updateTime">--:--:--</span></p>
+    </div>
+</section>
+
+<div class="footer-bottom">
+  <p>All rights reserved ©2025 CloudRP.
+    <span class="footer-right">Made by Max</span>
+  </p>
+</div>
+</div>
+
+<div id="server-off-message">
+    Server licentie uitgeschakeld.<br>
+    Vraag de ontwikkelaar voor meer informatie.
+</div>
+
+<script>
+async function updatePlayers() {
+    try {
+        const res = await fetch("https://servers-frontend.fivem.net/api/servers/single/9p3l9m");
+        const data = await res.json();
+
+        const count = data.Data.clients;
+        const players = data.Data.players;
+
+        document.getElementById("onlinePlayers").innerText = count;
+
+        const list = document.getElementById("playerContainer");
+        list.innerHTML = "";
+
+        if(players.length === 0){
+            const li = document.createElement("li");
+            li.textContent = "Geen spelers online";
+            list.appendChild(li);
+        } else {
+            const maxVisible = 5;
+            players.slice(0, maxVisible).forEach(p => {
+                const li = document.createElement("li");
+                li.innerHTML = `<span class="player-dot">•</span>${p.name}`;
+                list.appendChild(li);
+            });
+
+            if(players.length > maxVisible){
+                document.getElementById("morePlayers").style.display = "block";
+                document.getElementById("extraCount").innerText = players.length - maxVisible;
+            } else {
+                document.getElementById("morePlayers").style.display = "none";
+            }
+        }
+
+        const now = new Date();
+        document.getElementById("updateTime").innerText = now.toLocaleTimeString();
+
+    } catch (e) {
+        document.getElementById("onlinePlayers").innerText = "Offline";
+        const list = document.getElementById("playerContainer");
+        list.innerHTML = "<li>Kon spelers niet laden</li>";
+        document.getElementById("morePlayers").style.display = "none";
+    }
+}
+
+updatePlayers();
+setInterval(updatePlayers, 30000);
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyASL0e5lmshsGenfg7VhsIwCc28xU5RWvM",
+    authDomain: "designdock-5b4cc.firebaseapp.com",
+    databaseURL: "https://designdock-5b4cc-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "designdock-5b4cc",
+    storageBucket: "designdock-5b4cc.firebasestorage.app",
+    messagingSenderId: "286242057646",
+    appId: "1:286242057646:web:4f594d4b99fc76f795ac3f",
+    measurementId: "G-3VJDK1EWGN"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  const pageContent = document.getElementById("page-content");
+  const serverOff = document.getElementById("server-off-message");
+
+  const statusRef = ref(db, "websites/siteF/status");
+  onValue(statusRef, (snapshot) => {
+    const status = snapshot.val();
+    if(status === "uit") {
+      pageContent.style.display = "none";      
+      serverOff.style.display = "flex";        
+    } else {
+      pageContent.style.display = "block";     
+      serverOff.style.display = "none";        
+    }
+  });
+</script>
+
+</body>
+</html>

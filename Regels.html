@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>APV Cloud — Cloud Roleplay regels</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg: #0d0d14;
+        --card: #1d1f1f;
+        --border-glow: rgba(255,136,0,0.45);
+        --accent: #1ee2e8;
+        --accent-light: #1ee2e8;
+        --text-main: #f2f2f7;
+        --text-sub: #cfcfd8;
+        --gray: #2c2c3a;
+        --gray-light: #3a3a4a;
+    }
+
+    body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(130deg, #0e0e0e, #000000);
+        color: white;
+        overflow-x: hidden;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 60px;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(8px);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        border-bottom: 1px solid rgba(100, 98, 98, 0.769);
+    }
+
+    nav .logo img {
+        height: 50px;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        padding: 0;
+        margin: 0;
+    }
+
+    nav ul li a {
+        color: #fff;              
+        text-decoration: none;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    nav ul li a:hover {
+        color: #11dff1;           
+    }
+    
+    .dropdown {
+        position: relative; 
+        display: inline-block;
+    }
+
+
+    .dropbtn {
+        font-weight: 600;
+        cursor: pointer;
+        color: white;
+    }
+
+    .dropdown-content {
+        position: absolute;
+        top: 150%;      
+        left: 50%;
+        transform: translateX(-50%); 
+        background: rgba(26, 35, 63, 0.95);
+        padding: 5px 20px;
+        border-radius: 12px;
+        min-width: 200px;
+        border: 1px solid rgba(255, 255, 255, 0.345);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        display: none;
+        z-index: 999;
+    }
+
+
+    .dropdown-content a {
+        display: block;
+        color: white;
+        padding: 8px 0;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+
+    }
+
+    .dropdown-content a span {
+        font-size: 12px;
+        opacity: 0.6;
+    }
+
+    .dropdown-content a:hover {
+        color: #11dff1;
+    }
+
+    .show {
+        display: block;
+    }
+
+    .header-text {
+        margin-top: 60px;
+        text-align: center;
+    }
+
+    .header-text h1 {
+        font-weight: 900;
+        font-size: 48px;
+        margin: 0;
+    }
+
+    .header-text h2 {
+        margin: 6px 0;
+        color: var(--accent-light);
+        font-weight: 600;
+        font-size: 22px;
+    }
+
+    .content {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .card {
+        background: var(--card);
+        border-radius: 14px;
+        padding: 26px;
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        margin-bottom: 35px;
+    }
+
+    .card h3 {
+        margin-top: 0;
+        font-size: 26px;
+        color: var(--accent-light);
+    }
+
+    .card p {
+        color: var(--text-sub);
+        line-height: 1.6;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+    }
+
+    .category {
+        background: #252627;
+        border-radius: 12px;
+        padding: 18px;
+        border: 1px solid rgba(52, 245, 248, 0.142);
+        min-height: 120px;
+    }
+
+    .category h4 {
+        margin: 0 0 6px 0;
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--accent-light);
+    }
+
+    .category p {
+        margin: 0;
+        color: var(--text-main);
+        font-weight: 500;
+    }
+        
+    .regels-section {
+        width: 100%;
+        max-width: 900px;
+        margin: 50px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .regel-card {
+        background: #1d1f1f;
+        border: 1px solid #0af7ff45;
+        border-radius: 12px;
+        padding: 25px;
+    }
+
+    .artikel-title {
+        color: #1ee2e8;
+        font-size: 22px;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .sub-card {
+        background: #252627;
+        border: 1px solid #2e2e38;
+        padding: 18px 20px;
+        border-radius: 10px;
+        margin-bottom: 18px;
+    }
+
+    .sub-title {
+        color: #00ffffe5;
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .sub-card p {
+        color: #cfcfcf;
+        line-height: 1.5;
+    }
+
+    .sub-card ul {
+        color: #d4d4d4;
+        margin-left: 20px;
+        margin-top: 5px;
+    }
+
+    .sanctie {
+        color: #40fff5;
+        margin-top: 10px;
+        font-weight: 600;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 40px;
+      text-align: center;
+      padding-top: 15px;
+      position: relative; 
+    }
+
+    .footer-bottom p {
+      font-size: 0.85rem;
+      color: #777;
+      margin: 0;
+    }
+
+    .footer-bottom .footer-right {
+      position: absolute;
+      right: 20px; 
+      top: 70%;
+      transform: translateY(-50%);
+    }
+
+
+    @media (max-width: 900px) {
+      .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 40px;
+      }
+
+      .footer-right {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+      }
+
+      .footer-social {
+        grid-template-columns: repeat(2, auto);
+      }
+    }
+  #server-off-message {
+    display: none;             
+    position: fixed;           
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background-color: #111;    
+    color: white;             
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    z-index: 99999;           
+  }
+</style>
+
+</head>
+<body>
+<div id="page-content">
+  </div>
+
+  <div id="server-off-message">
+    Server licentie uitgeschakeld.<br>
+    Vraag de ontwikkelaar voor meer informatie.
+  </div>
+<nav>
+    <div class="logo">
+        <img src="/assets/CRP.png" alt="CRP Logo">
+    </div>
+
+    <ul>
+        <li><a href='/index.html'>Home</a></li>
+        <li><a href='/Regels.html'>Regels</a></li>
+        <li><a href="/dono.html">Doneren</a></li>
+        <li><a href="https://discord.gg/cloudroleplay" target="_blank">Discord</a></li>
+    </ul>
+</nav>
+
+<div class="header-text">
+    <h1>APV</h1>
+    <h2>Cloud Roleplay — Cloud regels</h2>
+</div>
+
+<div class="content">
+
+    <div class="card">
+        <h3>Inleiding</h3>
+        <p>
+            Deze APV bevat de regels, richtlijnen en handhavingsprocedures voor spelers binnen de stad Cloud.
+            Het doel is het waarborgen van realistische, eerlijke en kwalitatieve roleplay.
+            Alle spelers zijn verplicht zich aan deze regels te houden.
+            <br><br>
+            Het staffteam behoudt zich het recht sancties op te leggen binnen de aangegeven categorieën,
+            met inachtneming van redelijkheid en billijkheid. Spelers dienen zich bewust te zijn dat een
+            stafflid een ban kan uitschrijven zonder dat een overtreding op dat moment zichtbaar is.
+            <br><br>
+            Regels kunnen worden aangepast. Staff mag sancties opleggen op onderwerpen die niet expliciet
+            in de regels staan, maar logisch binnen RP passen. Alle zaken worden beoordeeld op feiten,
+            logs en eigen perspectief.
+        </p>
+    </div>
+    <div class="card">
+        <h3>Strafcategorieën</h3>
+
+        <div class="grid">
+            <div class="category">
+                <h4>Categorie 1</h4>
+                <p>Waarschuwing + 50 taakstraffen</p>
+                <p style="color:var(--text-sub); font-size:13px; margin-top:6px;">➥ 3 waarschuwingen in 1 maand is straf van categorie 2</p>
+            </div>
+
+            <div class="category">
+                <h4>Categorie 2</h4>
+                <p>Ban van een paar uur of 1 dag</p>
+            </div>
+
+            <div class="category">
+                <h4>Categorie 3</h4>
+                <p>Ban van 2 dagen</p>
+            </div>
+
+            <div class="category">
+                <h4>Categorie 4</h4>
+                <p>Ban van 3 dagen</p>
+            </div>
+
+            <div class="category">
+                <h4>Categorie 5</h4>
+                <p>Ban van 1 week</p>
+            </div>
+
+            <div class="category">
+                <h4>Categorie 6</h4>
+                <p>Ban van 2 weken</p>
+            </div>
+
+            <div class="category">
+                <h4>Categorie 7</h4>
+                <p>Ban van 1 maand</p>
+            </div>
+
+            <div class="category">
+                <h4>Categorie 8</h4>
+                <p>Account-wipe (account wordt helemaal gereset)</p>
+            </div>
+
+            <div class="category">
+                <h4>Categorie 9</h4>
+                <p>Permanente ban (Niet meer welkom)</p>
+            </div>
+        </div>
+    </div>
+
+<section class="regels-section">
+
+    <!-- We'll now place the cloud document's articles, each in a regel-card -->
+    <div class="regel-card">
+        <h2 class="artikel-title">Algemene definities & Staff-zaken</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Algemene definities</h3>
+            <p>
+                Stad: Cloud<br>
+                Staff Team: Cloud Staffleden<br>
+                Hogerop: Hoofd-Management+
+            </p>
+            <p>
+                Alle regels zijn van toepassing binnen Cloud. Bij verandering van de regels na het tijdstip waarop de regels zijn overtreden, worden de voor de overtreder meest gunstigste bepalingen toegepast.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Staff-zaken</h3>
+            <p>
+                Elk staff-lid is bevoegd staff-zaken te behandelen kijkend naar de regels van Cloud. Een stafflid mag op geen enkele wijze een staff-zaak behandelen waar hij/zij zelf bij betrokken is of waar zijn/haar beroep/gang bij betrokken is met uitzondering van Hoofdstaff of hoger met toeziend oog van een mede-hogerop. Alle staff-zaken worden behandeld op feiten, logs en/of eigen perspectief.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Begrippen</h3>
+            <p>
+                OOC → Out of Character. Alles buiten RP.<br>
+                IC → In Character. Alles binnen RP.<br>
+                VDM → Vehicle Deathmatch.<br>
+                FailRP → Slechte RP, Onvoldoende RP of totaal geen RP.<br>
+                RP → Roleplay.
+            </p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Informatie & Procedures</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Aanvechten van straffen</h3>
+            <p>
+                Een burger heeft het recht om in beroep te gaan tegen de opgelegde straf. Dit dient enkel binnen een tijdsbestek van 1 week te gebeuren. Na dit tijdsbestek valt er niet meer in beroep te gaan tegen uw opgelegde straf.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Refunds</h3>
+            <p>
+                Een refund dient binnen 2 weken geclaimd te zijn, anders zal de verkregen refund vervallen, tenzij er een afspraak is gemaakt met het stafflid in kwestie over het claimen op een later moment.
+            </p>
+            <p>
+                Om in aanmerking te komen voor een refund moet je aan de volgende eisen voldoen:
+                <ul>
+                    <li>Je hebt een clip van het gehele scenario met audio (eigen perspectief).</li>
+                    <li>De waarde van je refund moet minimaal €10.000 zijn.</li>
+                </ul>
+                Bij bepaalde situaties is geen refund mogelijk (bijv. overtreding van APV-regels in het scenario).
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Omzeilen van straf</h3>
+            <p>
+                Het omzeilen van een opgelegde straf is verboden. Indien dit geconstateerd wordt volgt een straf van categorie 9. Proberen “loopholes” te vinden in de regels en/of de regels te misbruiken/buigen voor je eigen voordeel is niet toegestaan en zal worden bestraft volgens categorie 7.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Bans en verhoging van straffen</h3>
+            <p>
+                Bans zijn verbonden aan GTA license en IP. Straffen worden verhoogd na herhaling; wanneer je dezelfde categorie meerdere keren hebt gehad kan je volgende straf verhoogd worden met 1 categorie.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Now include the actual Articles (Condensed into sub-cards matching original doc) -->
+    <div class="regel-card">
+        <h2 class="artikel-title">Artikel 1 – Cheats</h2>
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 1: Cheats</h3>
+            <p>
+                Het gebruik maken van software/hulpmiddelen van derde partijen om een voordeel in het spel te krijgen is niet toegestaan. Hieronder vallen o.a. cheats/hacks, combatpacks of een (externe) crosshair.
+            </p>
+            <p class="sanctie">Straf-categorie: 9</p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Artikel 2 – Exploits / Bugs / IRL Trade</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 2: Exploits/bugs</h3>
+            <p>
+                Doelbewust gebruik maken van een bug/exploit die in jou of andermans voordeel werkt (dupliceren, reloggen om health te krijgen, emote glitches, etc.) is verboden.
+            </p>
+            <p class="sanctie">Straf-categorie: 7 (onderscheidingen mogelijk: 5/7/8 afhankelijk van ernst)</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 2A: IRL Trade</h3>
+            <p>
+                IRL Trading (verhandelen van items, diensten, geld en accounts) is ten strengste verboden. Ook deelnemen aan of lid zijn van een Discord die handelt in onderwereldspullen is verboden. Weggeven van spullen bij stoppen is verboden.
+            </p>
+            <p class="sanctie">Straf-categorie: 9</p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Artikel 3 – Alts, Startersgeld & Bedreigingen</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 3: Alt Characters</h3>
+            <p>
+                Meerdere accounts om geld te verplaatsen of voordelen te behalen is verboden. Spoofen of anderszins toegang terugkrijgen via oneigenlijke methoden is verboden.
+            </p>
+            <p class="sanctie">Straf-categorie: 9</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 3A: Startersgeld</h3>
+            <p>
+                Het geven van startersgeld aan anderen zonder intentie om zelf te spelen is verboden.
+            </p>
+            <p class="sanctie">Straf-categorie: 9</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 4: Bedreigen / Dox / DDOS</h3>
+            <p>
+                Het bedreigen of intimideren van spelers/staff met DDOS of doxxen is ten strengste verboden.
+            </p>
+            <p class="sanctie">Straf-categorie: 9</p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Artikel 5 – Fail RP en gerelateerde regels</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 5: Fail RP</h3>
+            <p>
+                Alle onrealistische handelingen of het vermijden van RP in gewonde/dodelijke situaties valt onder Fail RP. Voorbeelden: praten terwijl je dood bent, emote-spam, onjuist gebruik van F6, inladen/uitladen/tanken/repareren zonder RP, etc.
+            </p>
+            <p class="sanctie">Straf-categorie: 3 (met specifieke gevallen hoger)</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Campen & Drugs-locaties</h3>
+            <p>
+                Campen op drugs-locaties of andere exploitative waiting is verboden en wordt vaak met categorie 4 bestraft.
+            </p>
+            <p class="sanctie">Sanctie: categorie 4</p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Artikel 6 – Powergamen & Karakterregels</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 6: Powergamen</h3>
+            <p>
+                Onrealistische toevoegingen aan scenario's die anderen verhinderen realistisch te spelen vallen onder powergamen. Voorbeelden: onrealistisch vluchten, emote abuse, third-person "peek" misbruik, etc.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 7: Karakter breken / OOC</h3>
+            <p>
+                Het breken van je karakter (OOC gedrag) is verboden. Ook bepaalde woorden (zoals "staff", "tickets", etc.) mogen niet OOC gebruikt worden in porto. Taalregels: Nederlands/Engels toegestaan afhankelijk van karakter.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Artikel 8 t/m 11 – Copbaiten, NVOL, New Life, Microfoon</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 8: Copbaiten</h3>
+            <p>
+                Doelbewust uitlokken van ambtenaren, het veroorzaken van achtervolgingen zonder rechtvaardiging of herhaaldelijk verstoren van scenario's valt onder copbaiten.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 9: No value of life (NVOL)</h3>
+            <p>
+                Het is verplicht waarde te hechten aan je leven. Acties zoals onnodig doodgaan of niet reageren op life-threatening situaties gelden als NVOL.
+            </p>
+            <p class="sanctie">Straf-categorie: 4</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 10: New life rule</h3>
+            <p>
+                Na dood in een scenario gelden de New Life Rule: je vergeet RP-kennis van vóór je dood en mag niet terug deelnemen in hetzelfde lopende scenario.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 11A & 11B: Microfoon / Voice changer</h3>
+            <p>
+                Werking microfoon verplicht; push-to-talk verplicht. Voice changers zijn over het algemeen verboden, behalve in specifieke onderwereld-situaties of door speciale eenheden met toestemming.
+            </p>
+            <p class="sanctie">Straf-categorie: 1-2</p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Artikel 12 t/m 20 – Communicatie, VDM/RDM, Metagamen</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 12: Earrape</h3>
+            <p>
+                Onnodig hard lawaai in voice (earrape) is verboden.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 13: VDM</h3>
+            <p>
+                Opzettelijk inrijden op burgers met de intentie ze te doden is VDM. Staff kan strenger bestraffen afhankelijk van ernst.
+            </p>
+            <p class="sanctie">Straf-categorie: 3 (kan hoger)</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 14: RDM</h3>
+            <p>
+                Willekeurig vermoorden van spelers zonder reden. Het verbaal uitdagen op sociale media kan soms als reden tellen mits bewijs.
+            </p>
+            <p class="sanctie">Straf-categorie: 3 (bij herhaling hogere sancties)</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 15: Metagamen</h3>
+            <p>
+                Gebruik van informatie van buiten je karakter (Discord, streams, calls, screen share) is metagamen en verboden. Tijdens scenario's muten verplicht.
+            </p>
+            <p class="sanctie">Straf-categorie: 3</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 16: Voertuig gebruik</h3>
+            <p>
+                Pitten boven 130 km/h niet toegestaan. Vliegen zonder brevet niet toegestaan. Offroad regels en voertuigregels zoals brake checking en verkoop via Twitter worden beschreven en gehandhaafd.
+            </p>
+            <p class="sanctie">Straf-categorie: 1 (in veel gevallen)</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 17: GTA style driving</h3>
+            <p>
+                Stunt jumps, onrealistisch offroad rijden, rammen zonder reden en gebruiken van obstakels om te springen zijn verboden.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 18: Illegale activiteiten via Twitter/Instagram</h3>
+            <p>
+                Het opzetten of uitvoeren van criminele activiteiten via social media (witwas aanbieden, wapens/drugs aanbieden) is verboden.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 19: Overheidskleding en impersonatie</h3>
+            <p>
+                Je voordoen als overheid of dragen van officiële uitrusting zonder recht is verboden.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 20: Schelden / Beledigen</h3>
+            <p>
+                Schelden en beledigen van spelers/staff is verboden; racistische/seksuele beledigingen hebben zwaardere sancties.
+            </p>
+            <p class="sanctie">Straf-categorie: 5 (of hoger bij racisme)</p>
+        </div>
+
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Artikel 21 t/m 31 – Outfit, Combatloggen, Streamers, Erotiek, Overvallen</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 21: Standaard outfit</h3>
+            <p>
+                Het dragen van een standaard (zwart-wit geblokte) outfit is niet toegestaan; maak een complete outfit met zichtbare armen/benen.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 22: Combatloggen</h3>
+            <p>
+                Combatloggen is verboden. Je hebt 5 minuten om terug te keren naar scenario; verlaten zonder reden valt onder combatloggen.
+            </p>
+            <p class="sanctie">Straf-categorie: 4</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 23: Stream sniping</h3>
+            <p>
+                Gebruik van informatie van streamers/content creators (stream sniping) is verboden.
+            </p>
+            <p class="sanctie">Straf-categorie: 3</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 24: Gebruik job voertuigen</h3>
+            <p>
+                Gebruik van voertuigen van whitelisted jobs voor andere doeleinden is niet toegestaan.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 25: Gebruik van /report</h3>
+            <p>
+                Reports dienen duidelijk en volledig te zijn; voor RDM/metagame/combatloggen maak je een ticket in support Discord.
+            </p>
+            <p class="sanctie">Straf-categorie: varieert</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 26-31 (Spammen, taal, stemherkenning, twitter media, criminele regels)</h3>
+            <p>
+                - Spammen: >3 reports in 10s is spammen.<br>
+                - Taal: Nederlands verplicht (met uitzondering van karaktervereisten).<br>
+                - Stemherkenning: toegestaan tenzij voice changer.<br>
+                - Twitter/Instagram media mag gebruikt worden als bewijs in-game.<br>
+                - Criminele activiteiten zijn onderhevig aan specifieke regels (oplichten, scammen, etc).
+            </p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Artikel 32 t/m 39 – Onderwereld regels, Gangwars, Ontvoeren, Ambulance</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 32: Onderwereld spelers</h3>
+            <p>
+                Rippen binnen 30 minuten op dezelfde locatie is verboden; maximum ripbedragen en regels voor wraakacties en betrokkenheid worden hier gespecificeerd.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 32.1: Gangwars</h3>
+            <p>
+                Wraakacties vereisen RP-bewijs; gangwars duren maximaal 48 uur; dood = dood regel geldt tijdens wars.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 32.2: Ontvoeren</h3>
+            <p>
+                Ontvoeren toegestaan vanaf minimaal 2 politie/kmar in dienst; agenten hebben extra beschermingen.
+            </p>
+            <p class="sanctie">Straf-categorie: 1 (voorwaarden)</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 33: Max aantal leden criminele organisaties</h3>
+            <p>
+                Maximum 10 leden per criminele organisatie (erkend en on-erkend). Overschrijding kan leiden tot ontbinding.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 34: Rippen van wapens</h3>
+            <p>
+                Wapens mogen geript worden indien fysiek zichtbaar; speciale regels bij masker/holster/helmen gelden. Je bent verplicht te clippen vanaf zien tot rippen voor bewijs.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 35: Officiële gangs</h3>
+            <p>
+                Misbruik van gang-menu is verboden; limieten op ontvoeren en friends gelden; misbruik kan leiden tot gang-warn of ontbinding.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 36A & 36B: Wraakacties</h3>
+            <p>
+                Wraakacties tegen whitelisted jobs verboden; regels rond deelname na overlijden in scenario gelden.
+            </p>
+            <p class="sanctie">Sanctie: 4-5 afhankelijk van omstandigheden</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 38: Ambulance regels</h3>
+            <p>
+                Ambulance-medewerkers moeten professioneel handelen; reviven-regels en samenwerking met onderwereld zijn strafbaar (corruptie).
+            </p>
+            <p class="sanctie">Straf-categorie: 2 (of hoger bij corruptie)</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 39: Streamers & Content creators</h3>
+            <p>
+                Streamers moeten staff op de hoogte brengen; Cloud in streamtitel; afwijkend toezicht en strengere handhaving mogelijk.
+            </p>
+            <p class="sanctie">Straf-categorie: 6 bij overtredingen</p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Artikel 40 t/m 45 – Erotiek, impersonatie, AFK, hulpdiensten</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 40: Erotische roleplay</h3>
+            <p>
+                Erotische RP is over het algemeen verboden; uitzonderingen mogelijk (bijv. stripclub) op discretionaire basis.
+            </p>
+            <p class="sanctie">Straf-categorie: 5</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 41: Voordoen als overheidsmedewerker</h3>
+            <p>
+                Je mag je niet voordoen als overheid of dragen van specifieke items zoals DSI tassen/vesten zonder toestemming.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 42: AFK kick voorkomen</h3>
+            <p>
+                Omzeilen van AFK-kick is verboden; ghosten voor loon is verboden.
+            </p>
+            <p class="sanctie">Straf-categorie: 3</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 43: Algemene regels hulpdiensten</h3>
+            <p>
+                Hulpdiensten moeten professioneel handelen; geen diefstal van overheidsvoertuigen; porto gebruik verplicht tijdens dienst; corruptie leidt tot ontslag + straf.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 44: Weggeven van goederen bij stoppen</h3>
+            <p>
+                Het weggeven/aanvaarden van goederen van een speler die stopt is verboden en wordt bestraft met permanente ban.
+            </p>
+            <p class="sanctie">Straf-categorie: 9</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 45: Helicopter gebruik</h3>
+            <p>
+                Helicopterbestuurders dienen vliegschoolregels te volgen; bij vordering door overheid dien je mee te werken; bij beschieting moet bestuurder direct vertrekken.
+            </p>
+            <p class="sanctie">Straf-categorie: 2 (indien overtreding)</p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Eilandregels (Artikel 46 t/m 49)</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 46: Rippen op eiland</h3>
+            <p>
+                Op het eiland mag je 75 zakjes per persoon rippen; na rip mag je diezelfde persoon niet binnen 60 min nogmaals rippen; alles zwart geld mag geript worden; regels voor wapens en fouilleren op eiland gelden.
+            </p>
+            <p class="sanctie">Straf-categorie: 2</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 46.1: RDM op eiland</h3>
+            <p>
+                RDM-regels op eiland wijken af; situaties met dodelijk geweld op eiland kunnen leiden tot lagere sancties onder specifieke condities.
+            </p>
+            <p class="sanctie">Straf-categorie: 1 (afhankelijk situatie)</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 47: KMAR/politie eiland</h3>
+            <p>
+                Verboden vanaf eiland op patrouillerende schepen/heli's van KMAR te schieten; DSI mag speciale operaties uitvoeren; uitzonderingen indien agenten worden meegenomen.
+            </p>
+            <p class="sanctie">Straf-categorie: 2</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 48</h3>
+            <p>
+                Geen samenwerking tussen gangs op eiland (om 30v30 te voorkomen); doden van burgers vanwege rivaliteit is verboden; regels m.b.t. wegsturen en timeouts zijn gespecificeerd.
+            </p>
+            <p class="sanctie">Straf-categorie: 2</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 49: Landen/vliegen met luchtvoertuigen</h3>
+            <p>
+                Verplicht landen op helipad of landingsbaan; regels voor schieten op helicopters verschillen per locatie; vliegregels gelden.
+            </p>
+            <p class="sanctie">Straf-categorie: 2 + waarschuwing vliegbrevet</p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Aircraft regels & overige (Artikel 50 t/m 53)</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 50: Vliegdekschip</h3>
+            <p>
+                De Aircraft Carrier is militair/justitieel gebied; betreden op eigen risico; KMAR/Politie heeft in uiterste situaties toestemming voor dodelijk vuur; No FlightZone en risico rondom manoeuvres.
+            </p>
+            <p class="sanctie">Straf-categorie: 2</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 51 t/m 51.2: Haat veroorzakend gedrag</h3>
+            <p>
+                Toxic reageren op meldingen of in Discord valt onder haat veroorzakend gedrag en wordt bestraft; ook het belachelijk maken van staff in openbare kanalen is niet toegestaan.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 52: Stelen van overheidsvoertuigen</h3>
+            <p>
+                Stelen van overheidsvoertuigen toegestaan tijdens achtervolging om weg te komen, maar niet zonder reden; bulletproof auto's stelen verboden; vereiste: wapen op zak.
+            </p>
+            <p class="sanctie">Straf-categorie: 1</p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Artikel 53: Liegen tegen staff / informatie achterhouden / voordoen als staff</h3>
+            <p>
+                Liegen tegen staff of informatie achterhouden is ten strengste verboden (categorie 5). Voordoen als staff is verboden (categorie 6).
+            </p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Regels Politie / KMar / ANWB</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Politie / KMar regels</h3>
+            <p>
+                - Bij winkeloverval bepaalt OvD de inzet. <br>
+                - Collega's mogen niet gerevived worden in scenario's; bij dood mogen ze niet meer deelnemen. <br>
+                - Vuurwapengebruik door politie is toegestaan onder strikte voorwaarden en verbale waarschuwing is verplicht. <br>
+                - Pitten door politie onder 130 km/u toegestaan. <br>
+                - Preventief fouilleren toegestaan bij dreigingsniveau 4+. <br>
+                - Zware wapens enkel door opgeleide eenheden.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h3 class="sub-title">ANWB regels</h3>
+            <p>
+                - Bij melden: locatie vermelden.<br>
+                - Afsluiten van abonnementen bij hoofd-monteur of hoger.<br>
+                - Onnodig rekeningen sturen is niet toegestaan.
+            </p>
+        </div>
+    </div>
+
+    <div class="regel-card">
+        <h2 class="artikel-title">Wapencategorieën</h2>
+
+        <div class="sub-card">
+            <h3 class="sub-title">Wapens per categorie</h3>
+            <p>
+                Categorie 1 (Slag/stoot/steek): Knuppel, Knuckle duster, Wapenstok (KMAR/Politie), Switchblade, Machete.<br>
+                Categorie 2 (Lichte vuurwapens): Taser (KMAR/Politie), Walter P99, Glock G17, Baretta, MP5.<br>
+                Categorie 3 (Zware vuurwapens): Desert Eagle, Shotgun, Uzi, P90, Mini-AK, AK-47, HK416 (DSI), Sniper rifle (DSI).
+            </p>
+        </div>
+    </div>
+
+</section>
+
+<div class="footer-bottom">
+  <p>All rights reserved ©2025 CloudRP.
+    <span class="footer-right">Made by Max</span>
+  </p>
+</div>
+
+</div>
+
+<script>
+  document.getElementById("sollicitatiesBtn").addEventListener("click", function(event) {
+      event.stopPropagation();
+      document.getElementById("sollicitatiesMenu").classList.toggle("show");
+  });
+
+  document.addEventListener("click", function(event) {
+      const menu = document.getElementById("sollicitatiesMenu");
+
+      if (!event.target.closest(".dropdown")) {
+          menu.classList.remove("show");
+      }
+  });
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyASL0e5lmshsGenfg7VhsIwCc28xU5RWvM",
+    authDomain: "designdock-5b4cc.firebaseapp.com",
+    databaseURL: "https://designdock-5b4cc-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "designdock-5b4cc",
+    storageBucket: "designdock-5b4cc.firebasestorage.app",
+    messagingSenderId: "286242057646",
+    appId: "1:286242057646:web:4f594d4b99fc76f795ac3f",
+    measurementId: "G-3VJDK1EWGN"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  const pageContent = document.getElementById("page-content");
+  const serverOff = document.getElementById("server-off-message");
+
+  const statusRef = ref(db, "websites/siteF/status");
+  onValue(statusRef, (snapshot) => {
+    const status = snapshot.val();
+    if(status === "uit") {
+      pageContent.style.display = "none";      
+      serverOff.style.display = "flex";        
+    } else {
+      pageContent.style.display = "block";     
+      serverOff.style.display = "none";        
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloud RP</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(130deg, #0e0e0e, #000000);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    #page-content {
+        flex: 1 0 auto; /* vult beschikbare ruimte, footer blijft onderaan */
+        position: relative;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 60px;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(8px);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        border-bottom: 1px solid rgba(100, 98, 98, 0.769);
+    }
+
+    nav .logo img { height: 50px; }
+    nav ul { list-style: none; display: flex; gap: 20px; padding: 0; margin: 0; }
+    nav ul li a { color: #fff; text-decoration: none; font-weight: 600; cursor: pointer; }
+    nav ul li a:hover { color: #11dff1; }
+
+    iframe {
+        width: 100%;
+        height: calc(100vh - 50px - 30px); /* schermhoogte min nav (50px) en footer (30px) */
+        border: none;
+    }
+
+    .footer-bottom {
+        flex-shrink: 0; /* voorkomt dat footer wordt ingedrukt */
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        padding-top: 15px;
+        height: 30px;
+        position: relative;
+    }
+
+    .footer-bottom p { font-size: 0.85rem; color: #777; margin: 0; }
+    .footer-bottom .footer-right { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); }
+
+    #server-off-message {
+        display: none;             
+        position: fixed;           
+        top: 0; 
+        left: 0;
+        width: 100%; 
+        height: 100%;
+        background-color: #111;    
+        color: white;             
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        text-align: center;
+        font-size: 28px;
+        padding: 20px;
+        z-index: 99999;           
+    }
+</style>
+
+</head>
+
+<body>
+<div id="page-content">
+<nav>
+
+    <div class="logo">
+        <img src="/assets/CRP.png" alt="CRP Logo">
+    </div>
+
+    <ul>
+        <li><a href='/index.html'>Home</a></li>
+        <li><a href='/Regels.html'>Regels</a></li>
+        <li><a href="/dono.html"></a>Doneren</li>
+        <li><a href="https://discord.gg/cloudroleplay" target="_blank">Discord</a></li>
+    </ul>
+</nav>
+<iframe src="https://www.tebex.io/"></iframe>
+<!-- Footer -->
+<div class="footer-bottom">
+  <p>All rights reserved ©2025 CloudRP.
+    <span class="footer-right">Made by Max</span>
+  </p>
+</div>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyASL0e5lmshsGenfg7VhsIwCc28xU5RWvM",
+    authDomain: "designdock-5b4cc.firebaseapp.com",
+    databaseURL: "https://designdock-5b4cc-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "designdock-5b4cc",
+    storageBucket: "designdock-5b4cc.firebasestorage.app",
+    messagingSenderId: "286242057646",
+    appId: "1:286242057646:web:4f594d4b99fc76f795ac3f",
+    measurementId: "G-3VJDK1EWGN"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  const pageContent = document.getElementById("page-content");
+  const serverOff = document.getElementById("server-off-message");
+
+  const statusRef = ref(db, "websites/siteF/status");
+  onValue(statusRef, (snapshot) => {
+    const status = snapshot.val();
+    if(status === "uit") {
+      pageContent.style.display = "none";      
+      serverOff.style.display = "flex";        
+    } else {
+      pageContent.style.display = "block";     
+      serverOff.style.display = "none";        
+    }
+  });
+</script>
+</body>
+</html>
